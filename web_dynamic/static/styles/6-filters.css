@@ -36,11 +36,22 @@ button:hover {
     font-weight: 600;
 }
 .filters h4 {
-    margin-left: 15%;
+    margin-left: 18%;
     margin-top: 0;
     font-weight: 400;
     font-size: 14px;
 }
+
+.textContainer {
+    width: 200px;
+}
+
+.text {
+    white-space: nowrap; /* Prevent the text from wrapping */
+    overflow: hidden; /* Hide the overflow content */
+    text-overflow: ellipsis; /* Display an ellipsis (...) to indicate truncated text */
+}
+
 .locations {
     height: 100%;
     width: 25%;
