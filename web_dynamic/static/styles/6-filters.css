@@ -6,7 +6,7 @@
     border: 1px solid #DDDDDD;
     border-radius: 4px;
 }
-button {
+.filters button {
     position: absolute;
     font-size: 18px;
     background: #FF5A5F;
