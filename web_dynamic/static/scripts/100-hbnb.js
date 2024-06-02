@@ -1,16 +1,41 @@
 $(document).ready(function () {
-
     const amenities = {};
+    const state = {};
+    const city = {};
     $('li input[type=checkbox]').change(function () {
-        if (this.checked) {
-            amenities[this.dataset.name] = this.dataset.id;
-        } else {
-            delete amenities[this.dataset.name]
+        if ($(this).closest('.amenities').length) {
+            if (this.checked) {
+                amenities[this.dataset.id] = this.dataset.name;
+            } else {
+                delete amenities[this.dataset.id]
+            }
         }
-        $('.amenities h4').text(Object.keys(amenities).sort().join(", "));
+        else if ($(this).closest('.locations').length) {
+            if ($(this).closest('#cityCheckbox').length) {
+                if (this.checked) {
+                    city[this.dataset.id] = this.dataset.name;
+                } else {
+                    delete city[this.dataset.id]
+                }
+            } else if ($(this).closest('#stateCheckbox')) {
+                if (this.checked) {
+                    state[this.dataset.id] = this.dataset.name;
+                } else {
+                    delete state[this.dataset.id]
+                }
+            }
+        }
+
+        $('.amenities h4').text(Object.values(amenities).sort().join(", "));
+
+        const mergedObj = Object.assign({}, state, city)
+        $('.locations h4').text(Object.values(mergedObj).sort().join(", "));
 
         if (Object.keys(amenities).length === 0) {
             $('.amenities h4').html(`&nbsp;`);
+        }
+        if (Object.keys(state).length === 0) {
+            $('.locations h4').html(`&nbsp;`);
         }
 
     });
@@ -27,10 +52,20 @@ $(document).ready(function () {
 
 
     $("button[type=button]").click(function () {
+        console.log({
+            amenities: Object.keys(amenities),
+            states: Object.keys(state),
+            cities: Object.keys(city)
+        });
         $.ajax({
             type: "POST",
             url: "http://localhost:5001/api/v1/places_search/",
-            data: JSON.stringify({ amenities: listOfAmenities }),
+            data: JSON.stringify(
+                {
+                    amenities: Object.keys(amenities),
+                    states: Object.keys(state),
+                    cities: Object.keys(city)
+                }),
             contentType: "application/json",
             success: function (response) {
                 response.sort((a, b) => a.name.localeCompare(b.name));
