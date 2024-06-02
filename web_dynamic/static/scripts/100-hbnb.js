@@ -69,6 +69,7 @@ $(document).ready(function () {
             contentType: "application/json",
             success: function (response) {
                 response.sort((a, b) => a.name.localeCompare(b.name));
+                console.log(response);
                 $.each(response, function (index, place) {
                     var articleContent = `
                 <article>
