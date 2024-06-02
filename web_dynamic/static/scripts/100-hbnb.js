@@ -1,4 +1,9 @@
 $(document).ready(function () {
+    /**
+     * if the checkbox is checked, must store the (Amenity, state, city) ID in a variable (dictionary or list)
+     * if the checkbox is unchecked, must remove the (Amenity, state, city) ID from the variable
+     * update the h4 tag inside the div (Amenity, state, city) with the list of Amenities checked
+     */
     const amenities = {};
     const state = {};
     const city = {};
@@ -34,12 +39,13 @@ $(document).ready(function () {
         if (Object.keys(amenities).length === 0) {
             $('.amenities h4').html(`&nbsp;`);
         }
-        if (Object.keys(state).length === 0) {
+        if (Object.keys(mergedObj).length === 0) {
             $('.locations h4').html(`&nbsp;`);
         }
 
     });
 
+    // to show that the api status is OK
     $.getJSON("http://localhost:5001/api/v1/status/", function (response) {
 
         const status = response.status;
@@ -50,13 +56,10 @@ $(document).ready(function () {
         }
     });
 
-
+    // When the button tag is clicked,
+    // a new POST request to places_search should be made
+    // with the list of Amenities, Cities and States checked
     $("button[type=button]").click(function () {
-        console.log({
-            amenities: Object.keys(amenities),
-            states: Object.keys(state),
-            cities: Object.keys(city)
-        });
         $.ajax({
             type: "POST",
             url: "http://localhost:5001/api/v1/places_search/",
@@ -68,8 +71,9 @@ $(document).ready(function () {
                 }),
             contentType: "application/json",
             success: function (response) {
+                $(".places").empty();
                 response.sort((a, b) => a.name.localeCompare(b.name));
-                console.log(response);
+
                 $.each(response, function (index, place) {
                     var articleContent = `
                 <article>

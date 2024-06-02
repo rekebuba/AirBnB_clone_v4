@@ -1,16 +1,17 @@
 $(document).ready(function () {
-    var listOfAmenities = [];
+    const amenities = {};
     $('li input[type=checkbox]').change(function () {
         if (this.checked) {
-            listOfAmenities.push(this.dataset.id);
+            amenities[this.dataset.id] = this.dataset.name;
         } else {
-            listOfAmenities.splice(this.dataset.id);
+            delete amenities[this.dataset.id]
         }
-        $('.amenities h4').text(listOfAmenities.sort().join(", "));
+        $('.amenities h4').text(Object.values(amenities).sort().join(", "));
 
-        if (listOfAmenities.length === 0) {
+        if (Object.keys(amenities).length === 0) {
             $('.amenities h4').html(`&nbsp;`);
         }
+
     });
 
     $.getJSON("http://localhost:5001/api/v1/status/", function (response) {

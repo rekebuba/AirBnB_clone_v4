@@ -3,11 +3,11 @@ $(document).ready(function () {
     const amenities = {};
     $('li input[type=checkbox]').change(function () {
         if (this.checked) {
-            amenities[this.dataset.name] = this.dataset.id;
+            amenities[this.dataset.id] = this.dataset.name;
         } else {
-            delete amenities[this.dataset.name]
+            delete amenities[this.dataset.id]
         }
-        $('.amenities h4').text(Object.keys(amenities).sort().join(", "));
+        $('.amenities h4').text(Object.values(amenities).sort().join(", "));
 
         if (Object.keys(amenities).length === 0) {
             $('.amenities h4').html(`&nbsp;`);
@@ -30,9 +30,10 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "http://localhost:5001/api/v1/places_search/",
-            data: JSON.stringify({ amenities: listOfAmenities }),
+            data: JSON.stringify({ amenities: Object.keys(amenities) }),
             contentType: "application/json",
             success: function (response) {
+                $(".places").empty();
                 response.sort((a, b) => a.name.localeCompare(b.name));
                 $.each(response, function (index, place) {
                     var articleContent = `
