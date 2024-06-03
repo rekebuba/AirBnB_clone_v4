@@ -97,21 +97,8 @@ $(document).ready(function () {
                     <h2>Amenities <span><button type="button">Show</button></span></h2>
                     <ul class="amenitielist", data-id=${place.id}></ul>
                     <div class="reviews">
-                        <h2>3 Reviews <span><button type="button">Show</button></span></h2>
-                        <ul class="reviewlist">
-                            <li>
-                                <h3>From Kamie Nean the 6th September 2017</h3>
-                                <p>I felt like a Queen during my stay!</p>
-                            </li>
-                            <li>
-                                <h3>From Heman the 5th October 2017</h3>
-                                <p>Beautiful Place.</p>
-                            </li>
-                            <li>
-                                <h3>From Numa the 15th August 2017</h3>
-                                <p>Great view and service!</p>
-                            </li>
-                        </ul>
+                        <h2>Reviews <span><button type="button">Show</button></span></h2>
+                        <ul class="reviewlist", data-id=${place.id} data-user_id=${place.user_id}></ul>
                     </div>
                 </div>
                 </article >
@@ -129,14 +116,28 @@ $(document).ready(function () {
                     const button = $(this);
                     const value = button.text();
                     const reviewsContainer = button.closest('.reviews');
-                    const reviewlist = reviewsContainer.find('.reviewlist')
+                    const reviewList = reviewsContainer.find('.reviewlist')
                     if (value === 'Show') {
                         button.text('Hide');
-                        console.log(value);
-                        reviewlist.show();
+                        const placeId = reviewList.get(0).dataset.id
+                        const uderId = reviewList.get(0).dataset.user_id
+                        $.getJSON(`http://localhost:5001/api/v1/places/${placeId}/reviews`, function (reviews) {
+                            $.each(reviews, function (index, review) {
+                                $.getJSON(`http://localhost:5001/api/v1/users/${review.user_id}`, function (user) {
+                                    const li = $('<li>');
+                                    const h3 = $('<h3>').text(user.first_name)
+                                    const p = $('<p>').html(review.text)
+                                    li.append(h3);
+                                    li.append(p);
+                                    reviewList.append(li);
+                                });
+                            });
+                        });
+                        reviewList.show();
                     } else {
                         button.text('Show');
-                        reviewlist.hide();
+                        reviewList.empty();
+                        reviewList.hide();
                     }
                 });
 
