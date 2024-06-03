@@ -44,7 +44,7 @@ $(document).ready(function () {
   });
 
   // to show that the api status is OK
-  $.getJSON('http://localhost:5001/api/v1/status/', function (response) {
+  $.getJSON('http://0.0.0.0:5001/api/v1/status/', function (response) {
     const status = response.status;
     if (status === 'OK') {
       $('#api_status').addClass('available');
@@ -59,7 +59,7 @@ $(document).ready(function () {
   $('button[type=button]').click(function () {
     $.ajax({
       type: 'POST',
-      url: 'http://localhost:5001/api/v1/places_search/',
+      url: 'http://0.0.0.0:5001/api/v1/places_search/',
       data: JSON.stringify({
         amenities: Object.keys(amenities),
         states: Object.keys(state),
@@ -112,7 +112,7 @@ $(document).ready(function () {
             button.text('Hide');
             const placeId = reviewList.get(0).dataset.id;
             $.getJSON(
-              `http://localhost:5001/api/v1/places/${placeId}/reviews`,
+              `http://0.0.0.0:5001/api/v1/places/${placeId}/reviews`,
               function (reviews) {
                 $(reviewNum).each(function () {
                   $(this)
@@ -125,7 +125,7 @@ $(document).ready(function () {
                 });
                 $.each(reviews, function (index, review) {
                   $.getJSON(
-                    `http://localhost:5001/api/v1/users/${review.user_id}`,
+                    `http://0.0.0.0:5001/api/v1/users/${review.user_id}`,
                     function (user) {
                       const li = $('<li>');
                       const h3 = $('<h3>').text(
@@ -163,7 +163,7 @@ $(document).ready(function () {
             button.text('Hide');
             const placeId = amenityList.get(0).dataset.id;
             $.getJSON(
-              `http://localhost:5001/api/v1/places/${placeId}/amenities`,
+              `http://0.0.0.0:5001/api/v1/places/${placeId}/amenities`,
               function (amenities) {
                 $(amenityNum).each(function () {
                   $(this)
