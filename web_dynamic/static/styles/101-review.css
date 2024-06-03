@@ -24,16 +24,107 @@
     box-sizing: border-box;
 }
 
-.tv {
+.TV {
     background-image: url(../images/icon_tv.png);
 }
 
-.wifi {
-    background-image: url(../images/icon_wifi.png);
+.Cable_TV {
+    background-image: url(../images/icon_cable_tv.png);
 }
 
-.pets {
+/* .Other_pet(s), */
+.Pets_allowed
+{
     background-image: url(../images/icon_pets.png);
+}
+
+.Air_conditioning {
+    background-image: url(../images/Air_conditioning.png);
+}
+
+.Breakfast {
+    background-image: url(../images/Breakfast.png);
+}
+
+.Doorman_Entry {
+    background-image: url(../images/Doorman_Entry.jpg);
+}
+
+.Elevator_in_building {
+    background-image: url(../images/Elevator_in_building.png);
+}
+
+.Fire_extinguisher {
+    background-image: url(../images/Fire_extinguisher.jpeg);
+}
+
+.First_aid_kit {
+    background-image: url(../images/First_aid_kit.png);
+}
+
+.Free_parking_on_premises {
+    background-image: url(../images/Free_parking_on_premises.jpeg);
+}
+
+.Gym {
+    background-image: url(../images/Gym.webp);
+}
+
+.Heating {
+    background-image: url(../images/Heating.png);
+}
+
+.Washer,
+.Pool {
+    background-image: url(../images/Pool.png);
+}
+
+.Internet {
+    background-image: url(../images/Internet.png);
+}
+
+.Keypad {
+    background-image: url(../images/Keypad.png);
+}
+
+.Kitchen {
+    background-image: url(../images/Kitchen.png);
+}
+
+.Laptop_friendly_workspace {
+    background-image: url(../images/Laptop_friendly_workspace.png);
+}
+
+.Lockbox {
+    background-image: url(../images/Lockbox.png);
+}
+
+.Private_living_room {
+    background-image: url(../images/Private_living_room.png);
+}
+
+.Self_Check-In {
+    background-image: url(../images/Self_Check-In.jpg);
+}
+
+.Shampoo {
+    background-image: url(../images/Shampoo.png);
+}
+
+.Smartlock {
+    background-image: url(../images/Smartlock.jpeg);
+}
+
+.Smoking_allowed {
+    background-image: url(../images/Smoking_allowed.png);
+}
+
+.Wheelchair_accessible {
+    background-image: url(../images/Wheelchair_accessible.png);
+}
+
+.Hot_tub {
+    background-image: url(../images/icon_bath.png);
 }
 
 .reviews {

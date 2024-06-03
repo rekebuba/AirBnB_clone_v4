@@ -175,7 +175,7 @@ $(document).ready(function () {
                     .replaceWith(`${amenities.length} Amenities `);
                 });
                 $.each(amenities, function (index, amenity) {
-                  $('<li>').text(amenity.name).appendTo(amenityList);
+                  $(`<li class=${amenity.name.replace(/\s/g, "_")}>`).text(amenity.name).appendTo(amenityList);
                 });
               }
             );
